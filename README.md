@@ -265,7 +265,7 @@ Caso note diferenças do contrato esperado, anote o endpoint, payload e resposta
 
 ---
 
-Feito com ❤️ para facilitar seu dia a dia de desenvolvimento.
+Feito para facilitar a rotina de testes.
 
 ---
 
@@ -310,3 +310,4 @@ dotnet test .\Challenger.Tests\Challenger.Tests.csproj -c Debug --filter "FullyQ
 ```
 
 - Via Test Explorer do VS Code: abra a aba Testing e clique em "Run All Tests" ou rode testes individuais. Se falhar o build por arquivo bloqueado, pare a API e tente novamente.
+
