@@ -1,0 +1,62 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "dotnet-restore-build",
+			"type": "shell",
+			"command": "dotnet restore Challenger.Api.sln; dotnet build Challenger.Api.sln -c Debug",
+			"problemMatcher": [
+				"$msCompile"
+			],
+			"group": "build"
+		},
+		{
+			"label": "add-ef-migration",
+			"type": "shell",
+			"command": "dotnet ef migrations add AddHighlightedMotorcycles -p Challenger.Infra/Challenger.Infra.csproj -s Challenger.Api/Challenger.Api.csproj",
+			"problemMatcher": [
+				"$msCompile"
+			],
+			"group": "build"
+		},
+		{
+			"label": "apply-ef-migrations",
+			"type": "shell",
+			"command": "dotnet ef database update -p Challenger.Infra/Challenger.Infra.csproj -s Challenger.Api/Challenger.Api.csproj",
+			"problemMatcher": [
+				"$msCompile"
+			],
+			"group": "build"
+		},
+		{
+			"label": "run-api",
+			"type": "shell",
+			"command": "dotnet run --project .\\Challenger.Api\\Challenger.Api.csproj",
+			"problemMatcher": [
+				"$msCompile"
+			],
+			"group": "build"
+		},
+		{
+			"label": "run-api-capture",
+			"type": "shell",
+			"command": "dotnet run --project .\\Challenger.Api\\Challenger.Api.csproj",
+			"problemMatcher": [
+				"$msCompile"
+			],
+			"group": "build"
+		},
+		{
+			"label": "dotnet-restore-build",
+			"type": "shell",
+			"command": "dotnet restore Challenger.Api.sln; dotnet build Challenger.Api.sln -c Debug",
+			"group": "build"
+		},
+		{
+			"label": "dotnet-restore-build",
+			"type": "shell",
+			"command": "dotnet restore Challenger.Api.sln; dotnet build Challenger.Api.sln -c Debug",
+			"group": "build"
+		}
+	]
+}

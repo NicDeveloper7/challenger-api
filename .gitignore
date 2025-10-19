@@ -1,0 +1,60 @@
+# Visual Studio / .NET standard ignores
+.vs/
+.vscode/*
+!.vscode/tasks.json
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+[Bb]in/
+[Oo]bj/
+
+# VS Code local history
+.history/
+
+# NuGet
+*.nupkg
+**/[Pp]ackages/*
+!.nuget/packages.config
+
+# Logs
+*.log
+
+# Resharper/JetBrains
+_ReSharper*/
+*.ReSharper
+*.DotSettings.user
+
+# Rider
+.idea/
+
+# Coverage
+coverage/
+*.coverage
+*.coveragexml
+
+# EF Core design-time files
+**/*.dbmdl
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Azure/Publish stuff
+*.pubxml
+*.publishsettings
+
+# Local storage folder used by the app
+c:/data/challenger-storage/
+
+# Misc
+*.tmp
+*.cache
