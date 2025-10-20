@@ -1,6 +1,6 @@
 # Challenger API
 
--- Desenvolvedor Nicholas Balbino --
+Desenvolvido por Nicholas Balbino 
 
 API para gestão de entregadores, motos e locações. Este guia explica como rodar o projeto, exemplos de requisições, quais eventos Kafka são publicados e como testá-los. No final, há um checklist para validar o contrato com o Swagger da Mottu.
 
@@ -312,5 +312,6 @@ dotnet test .\Challenger.Tests\Challenger.Tests.csproj -c Debug --filter "FullyQ
 ```
 
 - Via Test Explorer do VS Code: abra a aba Testing e clique em "Run All Tests" ou rode testes individuais. Se falhar o build por arquivo bloqueado, pare a API e tente novamente.
+
 
 
