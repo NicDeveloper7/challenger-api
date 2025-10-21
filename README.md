@@ -210,10 +210,10 @@ Você deverá ver o JSON do evento publicado após a criação da moto. Se o ano
 
 ---
 
-## Testar com o Swagger do desáfio (conferir contrato)
+## Testar com o Swagger 
 
 - Swagger local: http://localhost:5115/swagger
-- Importe/abra o Swagger oficial dos desafiadores e compare os contratos seguintes:
+- Importe/abra o Swagger.
 
 Checklist de compatibilidade:
 - Endpoints e métodos:
@@ -241,9 +241,6 @@ Checklist de compatibilidade:
   - 400 Bad Request para validações (ex.: campos obrigatórios, formato inválido de arquivo)
   - 404 Not Found quando recurso não existe
   - 409 Conflict quando há violação de unicidade (ex.: placa duplicada) ou regras de negócio (ex.: deletar moto com locações)
-
-Caso note diferenças do contrato esperado, anote o endpoint, payload e resposta divergentes para ajuste posterior.
-
 ---
 
 ## Dicas e troubleshooting
@@ -312,6 +309,7 @@ dotnet test .\Challenger.Tests\Challenger.Tests.csproj -c Debug --filter "FullyQ
 ```
 
 - Via Test Explorer do VS Code: abra a aba Testing e clique em "Run All Tests" ou rode testes individuais. Se falhar o build por arquivo bloqueado, pare a API e tente novamente.
+
 
 
 
