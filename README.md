@@ -62,6 +62,71 @@ docker run --name postgres-challenger -e POSTGRES_PASSWORD=root -e POSTGRES_DB=c
 
 ---
 
+---
+
+## Rodar no Visual Studio 2022 (Windows)
+
+Esta seção explica como abrir a solução, aplicar migrations e depurar a API usando o Visual Studio 2022.
+
+1) Abrir a solução
+
+- Dê duplo-clique no arquivo `Challenger.Api.sln` ou, no VS 2022, use File > Open > Project/Solution e selecione a solução na raiz do repositório.
+
+2) Restaurar pacotes e compilar
+
+- O VS geralmente restaura automaticamente. Se necessário, menu Build > Rebuild Solution.
+
+3) Definir projeto de inicialização
+
+- No Solution Explorer, clique com o botão direito em `Challenger.Api` e selecione "Set as Startup Project".
+- Opcional: escolha o perfil de execução (Kestrel ou IIS Express) na barra de execução do VS. Ambos funcionam; o Swagger estará em `/swagger`.
+
+4) Configurar banco de dados (EF Core Migrations)
+
+- Se estiver usando PostgreSQL local, confirme a connection string em `Challenger.Api/appsettings.Development.json`.
+- Aplique as migrations pelo Package Manager Console (Tools > NuGet Package Manager > Package Manager Console):
+
+```powershell
+# No Package Manager Console do Visual Studio
+Update-Database -Project Challenger.Infra -StartupProject Challenger.Api
+```
+
+- Alternativa (Developer PowerShell do VS):
+
+```powershell
+dotnet ef database update -p Challenger.Infra/Challenger.Infra.csproj -s Challenger.Api/Challenger.Api.csproj
+```
+
+5) (Opcional) Subir Kafka para recursos de mensageria
+
+- Com Docker Desktop rodando, na raiz do repo:
+
+```powershell
+docker compose up -d
+```
+
+- Habilite Kafka no `appsettings.Development.json` ajustando a seção `Kafka` (veja detalhes acima em "Como testar mensagens Kafka"). Se não habilitar, a aplicação usa um produtor de eventos no-op e funciona normalmente sem Kafka.
+
+6) Executar a API em modo Debug
+
+- Pressione F5 (Debug). O VS abrirá o navegador automaticamente na URL do profile selecionado (p.ex., `https://localhost:xxxx/swagger`).
+- Se usar IIS Express, o Visual Studio utilizará a porta e certificado de desenvolvimento do próprio IIS Express.
+
+7) Upload de CNH e Storage
+
+- Ajuste o provedor em `appsettings.Development.json > Storage` (`Provider`: `Local` ou `Minio`).
+- Para `Local`, garanta que a pasta base configurada exista e que o processo do VS tenha permissões de escrita.
+
+8) Rodar testes no Visual Studio
+
+- Abra Test > Test Explorer e clique em "Run All Tests". Você pode filtrar por projetos/classe/método. Se ocorrer erro de arquivo bloqueado durante build, feche/pare a aplicação em execução e execute novamente os testes.
+
+Notas e troubleshooting no VS 2022
+- Caso veja erro de certificado HTTPS, aceite/instale o certificado de desenvolvimento do VS quando solicitado.
+- Se a migration falhar por falta de ferramentas, instale as EF Core Tools no VS ou use o `dotnet-ef` no Developer PowerShell.
+- Se usar Docker Desktop WSL2, confirme que as portas 9092/19000 (Kafka/Kafdrop) não estão em uso.
+
+
 ## Exemplos de requisições (curl)
 
 Observações:
@@ -309,6 +374,7 @@ dotnet test .\Challenger.Tests\Challenger.Tests.csproj -c Debug --filter "FullyQ
 ```
 
 - Via Test Explorer do VS Code: abra a aba Testing e clique em "Run All Tests" ou rode testes individuais. Se falhar o build por arquivo bloqueado, pare a API e tente novamente.
+
 
 
 
