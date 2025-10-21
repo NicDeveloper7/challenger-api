@@ -62,9 +62,7 @@ docker run --name postgres-challenger -e POSTGRES_PASSWORD=root -e POSTGRES_DB=c
 
 ---
 
----
-
-## Rodar no Visual Studio 2022 (Windows)
+## Rodar no Visual Studio 2022 (Windows) - IDE que foi utilizada no desenvolvimento da API
 
 Esta seção explica como abrir a solução, aplicar migrations e depurar a API usando o Visual Studio 2022.
 
@@ -374,6 +372,7 @@ dotnet test .\Challenger.Tests\Challenger.Tests.csproj -c Debug --filter "FullyQ
 ```
 
 - Via Test Explorer do VS Code: abra a aba Testing e clique em "Run All Tests" ou rode testes individuais. Se falhar o build por arquivo bloqueado, pare a API e tente novamente.
+
 
 
 
