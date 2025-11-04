@@ -14,8 +14,8 @@ namespace Challenger.Domain.Models
         public Guid UserId { get; set; }
         public User User { get; set; } = null!;
 
-        public Guid MotorcycleId { get; set; }
-        public Motorcycle Motorcycle { get; set; } = null!;
+    public Guid? MotorcycleId { get; set; }
+    public Motorcycle? Motorcycle { get; set; }
 
         public DateTime CreatedAt { get; set; }
         public DateTime StartDate { get; set; }
@@ -45,7 +45,7 @@ namespace Challenger.Domain.Models
             {
                 Id = Guid.NewGuid(),
                 UserId = courierId,
-                MotorcycleId = motorcycleId,
+                MotorcycleId = motorcycleId == Guid.Empty ? null : motorcycleId,
                 CreatedAt = createdAtUtc,
                 StartDate = startDate,
                 ExpectedEndDate = expectedEnd,

@@ -3,6 +3,7 @@ using System;
 using Challenger.Infra.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Challenger.Infra.Migrations
 {
     [DbContext(typeof(SystemDbContext))]
-    partial class SystemDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251104152839_MakeMotorcycleNullable")]
+    partial class MakeMotorcycleNullable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -198,7 +201,7 @@ namespace Challenger.Infra.Migrations
 
                     b.ToTable("Rentals", null, t =>
                         {
-                            t.HasCheckConstraint("CK_Rentals_StartDate_NextDay", "\"StartDate\" = (date_trunc('day', \"CreatedAt\") + interval '1 day')::date");
+                            t.HasCheckConstraint("CK_Rentals_StartDate_NextDay", "\"StartDate\" = date_trunc('day', \"CreatedAt\") + interval '1 day'");
                         });
                 });
 

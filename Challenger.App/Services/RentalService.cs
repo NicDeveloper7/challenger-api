@@ -67,7 +67,10 @@ namespace Challenger.App.Services
             var plan = (RentalPlan)request.PlanDays;
 
             var createdAt = DateTime.UtcNow;
-            var rental = Rental.Create(request.CourierId, Guid.Empty, plan, createdAt, cnhType);
+            // Use the underlying UserId from the deliveryman profile so the Rental.UserId
+            // references the Users table (foreign key). The client sends the DeliverymanProfile.Id
+            // (courier profile id) in the request, so map profile -> user here.
+            var rental = Rental.Create(courier.UserId, Guid.Empty, plan, createdAt, cnhType);
 
             if (request.ExpectedEndDate != default)
             {
@@ -78,10 +81,14 @@ namespace Challenger.App.Services
             await _rentalRepo.AddAsync(rental);
             await _rentalRepo.SaveChangesAsync();
 
+            // Return the created rental. For the response's CourierId we return the
+            // DeliverymanProfile.Id (the id the client used) so the client can correlate
+            // the rental with the courier profile. Internally the Rental.UserId stores
+            // the Users.Id (courier.UserId).
             return new RentalResponse
             {
                 Id = rental.Id,
-                CourierId = rental.UserId,
+                CourierId = request.CourierId,
                 MotorcycleId = rental.MotorcycleId,
                 CreatedAt = rental.CreatedAt,
                 StartDate = rental.StartDate,

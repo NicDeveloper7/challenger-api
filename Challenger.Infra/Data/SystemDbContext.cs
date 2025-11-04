@@ -53,9 +53,9 @@ namespace Challenger.Infra.Data
             {
                 // Optional: enforce start date is the next day after created_at at DB level (PostgreSQL)
                 entity.ToTable("Rentals", tb =>
-                    tb.HasCheckConstraint(
-                        "CK_Rentals_StartDate_NextDay",
-                        "\"StartDate\" = date_trunc('day', \"CreatedAt\") + interval '1 day'"));
+                        tb.HasCheckConstraint(
+                            "CK_Rentals_StartDate_NextDay",
+                            "\"StartDate\" = (date_trunc('day', \"CreatedAt\") + interval '1 day')::date"));
             });
         }
     }

@@ -7,7 +7,7 @@ namespace Challenger.App.Contracts.Responses
     {
         public Guid Id { get; set; }
         public Guid CourierId { get; set; }
-        public Guid MotorcycleId { get; set; }
+    public Guid? MotorcycleId { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime ExpectedEndDate { get; set; }
